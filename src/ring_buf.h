@@ -35,6 +35,11 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#ifndef ARRAY_NELEM
+/*! convenience macro to provide the number of elements in the array a_ */
+#define ARRAY_NELEM(a_)  (sizeof(a_) / sizeof((a_)[0]))
+#endif /* ARRAY_NELEM */
+
 //! Ring buffer counter/index
 //
 // @attention
@@ -94,4 +99,5 @@ typedef void (*RingBufHandler)(RingBufElement const el);
 
 void RingBuf_process_all(RingBuf * const me, RingBufHandler handler);
 
+void RingBuf_clear(RingBuf * const me);
 #endif // RING_BUF_H

@@ -103,3 +103,11 @@ void RingBuf_process_all(RingBuf * const me, RingBufHandler handler) {
         atomic_store_explicit(&me->tail, tail, memory_order_release);
     }
 }
+
+//............................................................................
+void RingBuf_clear(RingBuf * const me)
+{
+	atomic_store(&me->head, 0U);  // initialize head atomically
+	atomic_store(&me->tail, 0U);  // initialize tail atomically
+}
+
